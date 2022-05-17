@@ -20,7 +20,7 @@ def parse_cmdargs():
     return parser.parse_args()
 
 def make_aux_relative_resolution_plots(
-    pred_model_dict, pred_base_dict, true_dict, weights, eval_specs,
+    pred_model_dict, true_dict, weights, eval_specs,
     plotdir, ext
 ):
     """Make plots of 2D histograms of relative energy resolution vs TrueE"""
@@ -30,21 +30,15 @@ def make_aux_relative_resolution_plots(
         "%s/plot_aux_model_rel_res_vs_true" % (plotdir), ext
     )
 
-    plot_rel_res_vs_true(
-        pred_base_dict, true_dict, weights,
-        eval_specs['rel_vs_true'],
-        "%s/plot_aux_base_rel_res_vs_true" % (plotdir), ext
-    )
 
 def make_aux_hist_plots(
-    pred_model_dict, pred_base_dict, true_dict, weights, eval_specs,
+    pred_model_dict, true_dict, weights, eval_specs,
     plotdir, ext
 ):
     """Make plots of energy histograms"""
     plot_energy_hists(
         [
             (true_dict,       weights, 'True',  'C3'),
-            (pred_base_dict,  weights, 'Base',  'C0'),
             (pred_model_dict, weights, 'Model', 'C1'),
         ],
         eval_specs['hist'],
@@ -62,15 +56,14 @@ def main():
 
     pred_model_dict = predict_energies(args, dgen, model)
     true_dict       = get_true_energies(dgen)
-    pred_base_dict  = get_base_energies(dgen, eval_specs['base_map'])
 
     make_aux_relative_resolution_plots(
-        pred_model_dict, pred_base_dict, true_dict, dgen.weights,
+        pred_model_dict, true_dict, dgen.weights,
         eval_specs, plotdir, cmdargs.ext
     )
 
     make_aux_hist_plots(
-        pred_model_dict, pred_base_dict, true_dict, dgen.weights,
+        pred_model_dict, true_dict, dgen.weights,
         eval_specs, plotdir, cmdargs.ext
     )
 

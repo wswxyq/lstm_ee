@@ -22,13 +22,12 @@ def parse_cmdargs():
     return parser.parse_args()
 
 def make_binstat_plots(
-    pred_model_dict, pred_base_dict, true_dict, weights, eval_specs,
+    pred_model_dict, true_dict, weights, eval_specs,
     plotdir, ext
 ):
     # pylint: disable=missing-function-docstring
     plot_binstats(
         [
-            (pred_base_dict,  true_dict, weights, 'Baseline', 'C0'),
             (pred_model_dict, true_dict, weights, 'Model',    'C1'),
         ],
         eval_specs['binstats_abs'], eval_specs['binstats_rel'],
@@ -37,7 +36,6 @@ def make_binstat_plots(
 
     plot_hairy_mean_binstat(
         [
-            (pred_base_dict,  true_dict, weights, 'Baseline', 'C0'),
             (pred_model_dict, true_dict, weights, 'Model',    'C1'),
         ],
         eval_specs['binstats_abs'], eval_specs['binstats_rel'],
@@ -55,10 +53,9 @@ def main():
 
     pred_model_dict = predict_energies(args, dgen, model)
     true_dict       = get_true_energies(dgen)
-    pred_base_dict  = get_base_energies(dgen, eval_specs['base_map'])
 
     make_binstat_plots(
-        pred_model_dict, pred_base_dict, true_dict, dgen.weights,
+        pred_model_dict, true_dict, dgen.weights,
         eval_specs, plotdir, cmdargs.ext
     )
 

@@ -30,13 +30,12 @@ def main():
 
     (stats_model_dict, hCont_model_dict), (stats_base_dict, hCont_base_dict) \
         = evaluate(
-            args, dgen, model, eval_specs['base_map'], eval_specs['fom'],
+            args, dgen, model, None, eval_specs['fom'],
             FOM_FIT_MARGIN, outdir
         )
 
     plot_fom(
         [
-            (hCont_base_dict,  stats_base_dict,  'Base ', 'left',  'C0'),
             (hCont_model_dict, stats_model_dict, 'Model', 'right', 'C1'),
         ],
         eval_specs['fom'],

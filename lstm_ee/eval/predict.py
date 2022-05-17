@@ -137,9 +137,7 @@ def get_base_energies(dgen, pred_map):
     """
 
     if pred_map is None:
-        return {
-            k : None for k in [ LABEL_PRIMARY, LABEL_SECONDARY, LABEL_TOTAL ]
-        }
+        return None
 
     result = {
         k : dgen.data_loader.get(v).ravel() for k,v in pred_map.items()
