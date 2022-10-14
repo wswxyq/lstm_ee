@@ -51,4 +51,7 @@ def add_train_dune_numu_presets(presets):
 def add_eval_dune_numu_presets(presets):
     """Add DUNE numu eval presets to the `presets` dict"""
     presets['dune_numu_5GeV'] = get_dune_numu_eval_presets((0, 5))
+    presets['dune_numu_1GeV'] = get_dune_numu_eval_presets((0, 1))
+    presets['dune_numu_1_5GeV'] = get_dune_numu_eval_presets((1, 5))
+    presets['dune_numu_01_2GeV'] = get_dune_numu_eval_presets((0.1, 2))
 
